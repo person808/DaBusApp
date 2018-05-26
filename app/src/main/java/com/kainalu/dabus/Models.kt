@@ -29,10 +29,8 @@ data class Route(
     @Json(name = "feed_id")
     val feedId: String,
     @Json(name = "route_color")
-    @Transient
     val color: String?,
     @Json(name = "route_desc")
-    @Transient
     val desc: String?,
     @Json(name = "route_id")
     val id: String,
@@ -41,7 +39,6 @@ data class Route(
     @Json(name = "route_short_name")
     val shortName: String,
     @Json(name = "route_text_color")
-    @Transient
     val textColor: String?,
     @Json(name = "route_type")
     val type: Int,
@@ -54,7 +51,6 @@ data class ShapePoint (
     @Json(name = "feed_id")
     val feedId: String,
     @Json(name = "shape_dist_traveled")
-    @Transient
     val shapeDistTraveled: Double,
     @Json(name = "shape_id")
     val shapeId: String,
@@ -81,9 +77,9 @@ data class Stop(
         @Json(name = "stop_id")
         val id: String? = null,
         @Json(name = "stop_lat")
-        private val lat: Double,
+        val lat: Double,
         @Json(name = "stop_lon")
-        private val lon: Double,
+        val lon: Double,
         @Json(name = "stop_name")
         val name: String,
         @Json(name = "stop_timezone")
@@ -91,7 +87,6 @@ data class Stop(
         @Json(name = "stop_url")
         val url: String,
         @Json(name = "wheelchair_boarding")
-        @Transient
         val wheelchairBoarding: Int,
         @Json(name = "zone_id")
         val zoneId: String? = null) {
