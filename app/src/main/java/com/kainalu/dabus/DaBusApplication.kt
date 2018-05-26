@@ -1,6 +1,7 @@
 package com.kainalu.dabus
 
 import android.app.Application
+import com.kainalu.dabus.dagger.DaggerSingletonComponent
 import com.kainalu.dabus.dagger.ServiceModule
 import com.kainalu.dabus.dagger.SingletonComponent
 
