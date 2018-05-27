@@ -49,17 +49,15 @@ class ArrivalAdapter(private val listener: OnListFragmentInteractionListener) :
             vehicleStr = context.getString(R.string.bus_vehicle, arrival.vehicle)
         }
 
-        var statusStr = ""
-        if (arrival.canceled == 1) {
-            statusStr = context.getString(R.string.canceled)
-        } else {
-            val minutesLeft = stopTimeDifference(arrival.stopTime).toInt()
-            when {
-                minutesLeft in 0..59 -> statusStr = context.resources
-                    .getQuantityString(R.plurals.minutes_left, minutesLeft, minutesLeft)
-                minutesLeft == -1 -> statusStr = context.getString(R.string.arrived)
-                minutesLeft < -1 -> statusStr = context.getString(R.string.departed)
-            }
+        val minutesLeft = stopTimeDifference(arrival.stopTime).toInt()
+        val statusStr = when {
+            arrival.canceled == 1 -> context.getString(R.string.canceled)
+            minutesLeft in 1..59 -> context.resources
+                .getQuantityString(R.plurals.minutes_left, minutesLeft, minutesLeft)
+            minutesLeft == 0 -> context.getString(R.string.arriving)
+            minutesLeft == -1 -> context.getString(R.string.arrived)
+            minutesLeft < -1 -> context.getString(R.string.departed)
+            else -> ""
         }
 
         return if (statusStr.isEmpty()) {

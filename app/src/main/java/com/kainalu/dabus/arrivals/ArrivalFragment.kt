@@ -38,6 +38,7 @@ class ArrivalFragment : RecyclerViewFragment(), ArrivalAdapter.OnListFragmentInt
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         list.adapter = adapter
+        swipeRefreshLayout.setOnRefreshListener { updateArrivals() }
         updateArrivals()
     }
 

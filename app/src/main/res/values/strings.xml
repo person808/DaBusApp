@@ -28,9 +28,9 @@
     <string name="arrival_time">%1$s - %2$s</string>
     <string name="arrival_time_status">%1$s - %2$s - %3$s</string>
     <string name="arrived">Arrived</string>
+    <string name="arriving">Arriving</string>
     <string name="departed">Departed</string>
     <plurals name="minutes_left">
-        <item quantity="zero">Arriving</item>
         <item quantity="one">Arriving in %d minute</item>
         <item quantity="other">Arriving in %d minutes</item>
     </plurals>
