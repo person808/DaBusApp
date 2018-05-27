@@ -1,6 +1,5 @@
 package com.kainalu.dabus.search
 
-import android.app.SearchManager
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
@@ -45,6 +44,7 @@ class SearchFragment : RecyclerViewFragment(), SearchView.OnQueryTextListener,
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        swipeRefreshLayout.isEnabled = false
         when (searchType) {
             SEARCH_STOP, SEARCH_STREET -> {
                 list.adapter = stopAdapter
@@ -76,7 +76,6 @@ class SearchFragment : RecyclerViewFragment(), SearchView.OnQueryTextListener,
         super.onCreateOptionsMenu(menu, inflater)
         inflater!!.inflate(R.menu.search_menu, menu)
         // Get the SearchView and set the searchable configuration
-        val searchManager = context!!.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menu!!.findItem(R.id.app_bar_search).actionView as SearchView
         searchView.setOnQueryTextListener(this)
         searchView.setIconifiedByDefault(false)
