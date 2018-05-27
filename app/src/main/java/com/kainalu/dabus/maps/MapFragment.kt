@@ -11,6 +11,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.kainalu.dabus.R
+import kotlinx.android.synthetic.main.fragment_map.*
 
 
 abstract class MapFragment : Fragment(), OnMapReadyCallback {
@@ -36,6 +37,7 @@ abstract class MapFragment : Fragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+        swipeRefreshLayout.isEnabled = false
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
