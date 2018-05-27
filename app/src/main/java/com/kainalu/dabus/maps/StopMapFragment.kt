@@ -7,6 +7,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.kainalu.dabus.R
 import com.kainalu.dabus.Stop
+import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.android.synthetic.main.stop_info_window.view.*
 
 
@@ -26,6 +27,7 @@ abstract class StopMapFragment : MapFragment() {
         for (stop in stopList) {
             addStopMarker(map, stop)
         }
+        swipeRefreshLayout.isRefreshing = false
     }
 
     override fun onMapReady(googleMap: GoogleMap) {

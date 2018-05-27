@@ -39,10 +39,8 @@ class SearchFragment : RecyclerViewFragment(), SearchView.OnQueryTextListener,
         routeViewModel = ViewModelProviders.of(this).get(RouteViewModel::class.java)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_list, container, false)
     }
 
@@ -50,19 +48,23 @@ class SearchFragment : RecyclerViewFragment(), SearchView.OnQueryTextListener,
         when (searchType) {
             SEARCH_STOP, SEARCH_STREET -> {
                 list.adapter = stopAdapter
+                swipeRefreshLayout.isRefreshing = true
                 stopViewModel.getStopData(false).observe(this, Observer { stops ->
                     if (stops != null) {
                         stopList = stops
                         stopAdapter.submitList(stops)
+                        swipeRefreshLayout.isRefreshing = false
                     }
                 })
             }
             SEARCH_ROUTE, SEARCH_DESTINATION -> {
                 list.adapter = routeAdapter
+                swipeRefreshLayout.isRefreshing = true
                 routeViewModel.getRouteData(false).observe(this, Observer { routes ->
                     if (routes != null) {
                         routeList = routes
                         routeAdapter.submitList(routeList)
+                        swipeRefreshLayout.isRefreshing = false
                     }
                 })
             }
@@ -76,8 +78,6 @@ class SearchFragment : RecyclerViewFragment(), SearchView.OnQueryTextListener,
         // Get the SearchView and set the searchable configuration
         val searchManager = context!!.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menu!!.findItem(R.id.app_bar_search).actionView as SearchView
-        // Assumes current activity is the searchable activity
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
         searchView.setOnQueryTextListener(this)
         searchView.setIconifiedByDefault(false)
         searchView.maxWidth = Integer.MAX_VALUE
@@ -85,6 +85,11 @@ class SearchFragment : RecyclerViewFragment(), SearchView.OnQueryTextListener,
         searchView.requestFocus()
         imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm!!.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        hideKeyboard()
     }
 
     override fun onQueryTextChange(newText: String): Boolean {
@@ -135,11 +140,9 @@ class SearchFragment : RecyclerViewFragment(), SearchView.OnQueryTextListener,
             return fragment
         }
 
-        private fun filterStops(
-            stops: List<Stop>,
-            query: String,
-            queryType: SearchType
-        ): List<Stop> {
+        private fun filterStops(stops: List<Stop>,
+                                query: String,
+                                queryType: SearchType): List<Stop> {
             val lowerCaseQuery = query.toLowerCase()
 
             val filteredStopList = ArrayList<Stop>()
@@ -156,11 +159,9 @@ class SearchFragment : RecyclerViewFragment(), SearchView.OnQueryTextListener,
             return filteredStopList
         }
 
-        private fun filterRoutes(
-            routes: List<Route>,
-            query: String,
-            queryType: SearchType
-        ): List<Route> {
+        private fun filterRoutes(routes: List<Route>,
+                                 query: String,
+                                 queryType: SearchType): List<Route> {
             val lowerCaseQuery = query.toLowerCase()
 
             val filteredRouteList = ArrayList<Route>()

@@ -47,9 +47,11 @@ class ArrivalFragment : RecyclerViewFragment(), ArrivalAdapter.OnListFragmentInt
     }
 
     private fun updateArrivals() {
+        swipeRefreshLayout.isRefreshing = true
         stopViewModel.getStopRealtimeArrivals(stopId).observe(this, Observer {
             it?.let {
                 adapter.submitList(it)
+                swipeRefreshLayout.isRefreshing = false
             }
         })
     }

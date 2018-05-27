@@ -19,6 +19,7 @@ import com.kainalu.dabus.InfoActivity
 import com.kainalu.dabus.Stop
 import com.kainalu.dabus.StopViewModel
 import com.kainalu.dabus.dagger.Injector
+import kotlinx.android.synthetic.main.fragment_map.*
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnNeverAskAgain
 import permissions.dispatcher.OnPermissionDenied
@@ -89,6 +90,7 @@ class NearbyStopMapFragment : StopMapFragment(), OnMapReadyCallback,
         map.setOnMarkerClickListener(this)
         map.setOnInfoWindowClickListener(this)
 
+        swipeRefreshLayout.isRefreshing = true
         stopViewModel.getStopData().observe(this, Observer {
             it?.let {
                 stopList = it

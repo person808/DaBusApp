@@ -1,7 +1,7 @@
 package com.kainalu.dabus
 
 import android.os.Bundle
-import com.kainalu.dabus.maps.NearbyStopMapFragment
+import com.kainalu.dabus.search.SearchTypesFragment
 
 class MainActivity : BaseActivity() {
 
@@ -13,7 +13,7 @@ class MainActivity : BaseActivity() {
         fragment = if (savedInstanceState != null) {
             supportFragmentManager.getFragment(savedInstanceState, CURRENT_FRAGMENT)
         } else {
-            NearbyStopMapFragment()
+            SearchTypesFragment()
         }
 
         supportFragmentManager.beginTransaction()
