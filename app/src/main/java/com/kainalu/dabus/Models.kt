@@ -75,7 +75,7 @@ data class Stop(
         @Json(name = "stop_desc")
         val description: String?,
         @Json(name = "stop_id")
-        val id: String? = null,
+        val id: String,
         @Json(name = "stop_lat")
         val lat: Double,
         @Json(name = "stop_lon")

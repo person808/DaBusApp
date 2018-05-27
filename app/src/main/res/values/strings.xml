@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">DaBus</string>
+
+    <!-- Search options -->
+    <string-array name="search_types">
+        <item name="search_stop">Search by Stop Number</item>
+        <item name="search_street">Search by Street Name</item>
+        <item name="search_route">Search by Route Number</item>
+        <item name="search_destination">Search by Destination Sign</item>
+    </string-array>
+    <string-array name="search_type_descriptions">
+        <item name="search_stop_description">Enter a stop number to find a stop.</item>
+        <item name="search_street_description">Enter a street name to find stops.</item>
+        <item name="search_route_description">Enter a route number to find stops.</item>
+        <item name="search_destination_description">Enter a destination sign to find stops.</item>
+    </string-array>
+
+    <string name="route_label">Route %s - %s</string>
+    <string name="stop_label">Stop %s - %s</string>
+    <string name="search_label">Search</string>
+
 </resources>
