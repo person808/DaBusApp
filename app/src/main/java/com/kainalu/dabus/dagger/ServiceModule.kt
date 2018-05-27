@@ -1,5 +1,6 @@
 package com.kainalu.dabus.dagger
 
+import android.location.Location
 import com.kainalu.dabus.DaBusApi
 import dagger.Module
 import dagger.Provides
@@ -21,6 +22,13 @@ class ServiceModule {
     @Singleton
     fun daBusService(retrofit: Retrofit): DaBusApi =
             retrofit.create(DaBusApi::class.java)
+
+    @Provides
+    @Singleton
+    fun location(): Location = Location("").apply {
+        latitude = 21.305554
+        longitude = -157.857045
+    }
 
     companion object {
         const val BASE_URL = "http://159.89.157.81"

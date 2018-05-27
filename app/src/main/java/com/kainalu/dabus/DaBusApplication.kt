@@ -1,11 +1,12 @@
 package com.kainalu.dabus
 
 import android.app.Application
+import com.kainalu.dabus.dagger.ContextModule
 import com.kainalu.dabus.dagger.DaggerSingletonComponent
 import com.kainalu.dabus.dagger.ServiceModule
 import com.kainalu.dabus.dagger.SingletonComponent
 
-class DaBusApplication: Application() {
+class DaBusApplication : Application() {
 
     lateinit var component: SingletonComponent
         private set
@@ -14,8 +15,9 @@ class DaBusApplication: Application() {
         super.onCreate()
         INSTANCE = this
         component = DaggerSingletonComponent.builder()
-                .serviceModule(ServiceModule())
-                .build()
+            .contextModule(ContextModule(this))
+            .serviceModule(ServiceModule())
+            .build()
     }
 
     companion object {
