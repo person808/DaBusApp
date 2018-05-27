@@ -3,6 +3,7 @@ package com.kainalu.dabus.maps
 import android.Manifest
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -13,6 +14,8 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import com.kainalu.dabus.DaBusApplication.Companion.EXTRA_STOP_ID
+import com.kainalu.dabus.InfoActivity
 import com.kainalu.dabus.Stop
 import com.kainalu.dabus.StopViewModel
 import com.kainalu.dabus.dagger.Injector
@@ -24,6 +27,7 @@ import permissions.dispatcher.RuntimePermissions
 
 @RuntimePermissions
 class NearbyStopMapFragment : StopMapFragment(), OnMapReadyCallback,
+    GoogleMap.OnInfoWindowClickListener,
     GoogleMap.OnMarkerClickListener, GoogleMap.OnCameraIdleListener {
 
     private lateinit var stopViewModel: StopViewModel
@@ -83,7 +87,7 @@ class NearbyStopMapFragment : StopMapFragment(), OnMapReadyCallback,
         startLocationUpdatesWithPermissionCheck()
         map.setOnCameraIdleListener(this)
         map.setOnMarkerClickListener(this)
-        map.setOnInfoWindowClickListener { }
+        map.setOnInfoWindowClickListener(this)
 
         stopViewModel.getStopData().observe(this, Observer {
             it?.let {
@@ -103,6 +107,15 @@ class NearbyStopMapFragment : StopMapFragment(), OnMapReadyCallback,
         map.animateCamera(CameraUpdateFactory.newLatLng(marker.position))
         marker.showInfoWindow()
         return true
+    }
+
+    override fun onInfoWindowClick(marker: Marker?) {
+        marker?.also {
+            val intent = Intent(context, InfoActivity::class.java).apply {
+                putExtra(EXTRA_STOP_ID, (it.tag as Stop).id)
+            }
+            startActivity(intent)
+        }
     }
 
     private fun filterStops(stopList: List<Stop>?): List<Stop> {

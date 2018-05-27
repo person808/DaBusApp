@@ -19,4 +19,20 @@
     <string name="stop_label">Stop %s - %s</string>
     <string name="search_label">Search</string>
 
+    <string name="stop">Stop %s</string>
+
+    <string name="route_headsign">Route %1$s - %2$s</string>
+    <string name="bus_vehicle">Bus %s</string>
+    <string name="no_gps">No GPS</string>
+    <string name="canceled">Canceled</string>
+    <string name="arrival_time">%1$s - %2$s</string>
+    <string name="arrival_time_status">%1$s - %2$s - %3$s</string>
+    <string name="arrived">Arrived</string>
+    <string name="departed">Departed</string>
+    <plurals name="minutes_left">
+        <item quantity="zero">Arriving</item>
+        <item quantity="one">Arriving in %d minute</item>
+        <item quantity="other">Arriving in %d minutes</item>
+    </plurals>
+
 </resources>

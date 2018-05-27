@@ -30,7 +30,8 @@ abstract class RecyclerViewFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.list
         recyclerView.layoutManager = LinearLayoutManager(view.context)
-        recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        recyclerView.addItemDecoration(DividerItemDecoration(view.context,
+                                                             DividerItemDecoration.VERTICAL))
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
