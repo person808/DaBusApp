@@ -2,6 +2,7 @@ package com.kainalu.dabus
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.content.SharedPreferences
 import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,7 +16,8 @@ import javax.inject.Singleton
  */
 
 @Singleton
-class StopRepository @Inject constructor(private val daBusApi: DaBusApi) {
+class StopRepository @Inject constructor(private val daBusApi: DaBusApi,
+                                         private val sharedPreferences: SharedPreferences) {
 
     val stopData: LiveData<List<Stop>>
         get() {
@@ -48,6 +50,29 @@ class StopRepository @Inject constructor(private val daBusApi: DaBusApi) {
         return stopData
     }
 
+    fun addFavoriteStop(stopId: String) {
+        val favorites = readFavoriteStops()
+        favorites.add(stopId)
+        saveFavoriteStops(favorites)
+    }
+
+    fun removeFavoriteStop(stopId: String) {
+        val favorites = readFavoriteStops()
+        favorites.remove(stopId)
+        saveFavoriteStops(favorites)
+    }
+
+    fun stopInFavorites(stopId: String) = readFavoriteStops().contains(stopId)
+
+    private fun readFavoriteStops(): MutableSet<String> = sharedPreferences.getStringSet(FAVORITE_STOPS_KEY, mutableSetOf())
+
+    private fun saveFavoriteStops(stopIds: MutableSet<String>) {
+        with (sharedPreferences.edit()) {
+            putStringSet(FAVORITE_STOPS_KEY, stopIds)
+            apply()
+        }
+    }
+
     fun getRealtimeArrivals(stopId: String): LiveData<List<Arrival>> {
         val stopArrivals = MutableLiveData<List<Arrival>>()
         daBusApi.getRealtimeArrivals(stopId).enqueue(object : Callback<List<Arrival>> {
@@ -76,5 +101,9 @@ class StopRepository @Inject constructor(private val daBusApi: DaBusApi) {
             }
         })
         return stopArrivals
+    }
+
+    companion object {
+        private const val FAVORITE_STOPS_KEY = "favoriteStopsKey"
     }
 }

@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">DaBus</string>
 
+    <!-- Bottom navigation -->
+    <string name="nearby">Nearby</string>
+    <string name="favorites">Favorites</string>
+    <string name="search">Search</string>
+
     <!-- Search options -->
     <string-array name="search_types">
         <item name="search_stop">Search by Stop Number</item>
@@ -34,5 +39,8 @@
         <item quantity="one">Arriving in %d minute</item>
         <item quantity="other">Arriving in %d minutes</item>
     </plurals>
+
+    <string name="add_favorite">Add to Favorites</string>
+    <string name="remove_favorite">Remove from Favorites</string>
 
 </resources>

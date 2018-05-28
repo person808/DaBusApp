@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_list.view.*
 abstract class RecyclerViewFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (savedInstanceState != null) {

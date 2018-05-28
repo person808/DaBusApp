@@ -1,6 +1,7 @@
 package com.kainalu.dabus.dagger
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.location.Location
 import com.kainalu.dabus.DaBusApi
 import com.kainalu.dabus.RouteRepository
@@ -14,6 +15,7 @@ import javax.inject.Singleton
 @Singleton
 interface SingletonComponent {
     fun appContext(): Context
+    fun sharedPreferences(): SharedPreferences
     fun retrofit(): Retrofit
     fun daBusService(): DaBusApi
     fun routeRepository(): RouteRepository

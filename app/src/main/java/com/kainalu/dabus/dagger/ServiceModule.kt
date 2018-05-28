@@ -1,6 +1,9 @@
 package com.kainalu.dabus.dagger
 
+import android.app.Application
+import android.content.SharedPreferences
 import android.location.Location
+import android.preference.PreferenceManager
 import com.kainalu.dabus.DaBusApi
 import dagger.Module
 import dagger.Provides
@@ -22,6 +25,11 @@ class ServiceModule {
     @Singleton
     fun daBusService(retrofit: Retrofit): DaBusApi =
             retrofit.create(DaBusApi::class.java)
+
+    @Provides
+    @Singleton
+    fun sharedPreferences(application: Application): SharedPreferences =
+        PreferenceManager.getDefaultSharedPreferences(application)
 
     @Provides
     @Singleton

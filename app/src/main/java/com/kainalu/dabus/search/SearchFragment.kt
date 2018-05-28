@@ -34,8 +34,8 @@ class SearchFragment : RecyclerViewFragment(), SearchView.OnQueryTextListener,
         }
 
         setHasOptionsMenu(true)
-        stopViewModel = ViewModelProviders.of(this).get(StopViewModel::class.java)
-        routeViewModel = ViewModelProviders.of(this).get(RouteViewModel::class.java)
+        stopViewModel = ViewModelProviders.of(activity!!).get(StopViewModel::class.java)
+        routeViewModel = ViewModelProviders.of(activity!!).get(RouteViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -74,7 +74,7 @@ class SearchFragment : RecyclerViewFragment(), SearchView.OnQueryTextListener,
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater!!.inflate(R.menu.search_menu, menu)
+        inflater!!.inflate(R.menu.menu_search, menu)
         // Get the SearchView and set the searchable configuration
         val searchView = menu!!.findItem(R.id.app_bar_search).actionView as SearchView
         searchView.setOnQueryTextListener(this)
