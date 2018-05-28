@@ -42,11 +42,10 @@ class ArrivalAdapter(private val listener: OnListFragmentInteractionListener) :
     }
 
     private fun getArrivalStatusString(context: Context, arrival: Arrival): String {
-        val vehicleStr: String
-        if (arrival.vehicle == "???") {
-            vehicleStr = context.getString(R.string.no_gps)
+        val vehicleStr = if (arrival.vehicle == "???") {
+            context.getString(R.string.no_gps)
         } else {
-            vehicleStr = context.getString(R.string.bus_vehicle, arrival.vehicle)
+            context.getString(R.string.bus_vehicle, arrival.vehicle)
         }
 
         val minutesLeft = stopTimeDifference(arrival.stopTime).toInt()

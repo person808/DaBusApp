@@ -16,9 +16,9 @@ abstract class BaseActivity : AppCompatActivity() {
 
     // Allow fragment to handle menu selections by returning false.
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.favorites_button -> return false
-            else -> return false
+        return when (item.itemId) {
+            R.id.favorites_button -> false
+            else -> false
         }
     }
 
