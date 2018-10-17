@@ -1,5 +1,7 @@
 # DaBus App
 
+UNFINISHED
+
 An Android app for checking service times for [TheBus](http://www.thebus.org/). Created because the
 official app can be a little crashy and to teach myself Android app development. Uses my 
 [DaBus API wrapper](https://github.com/person808/dabus-api) to get arrival information.
